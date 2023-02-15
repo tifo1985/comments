@@ -31,6 +31,8 @@ services:
     restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: dfbsdbdfbdfb
+    ports:
+      - "3306:3306"
 
   comments-front-nginx:
 

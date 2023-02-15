@@ -7,6 +7,8 @@ RUN apk add --update --no-cache ${PHPIZE_DEPS} git curl
 # ZIP module
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip && docker-php-ext-install zip
 
+RUN docker-php-ext-install mysqli pdo_mysql
+
 # Imagick module
 RUN apk add --no-cache libgomp imagemagick imagemagick-dev && \
 	pecl install -o -f imagick && \
@@ -18,11 +20,10 @@ RUN apk add --no-cache bash && \
 	apk add symfony-cli && \
 	apk del bash
 
-# Necessary build deps not longer needed
-RUN apk del --no-cache ${PHPIZE_DEPS}
-
 # Composer
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 # Clean up image
 RUN rm -rf /tmp/* /var/cache
+
+WORKDIR /var/www/app

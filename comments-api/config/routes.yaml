@@ -1,4 +1,6 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+comments:
+  resource:
+    path: ../src/Comments/Application/Controller/
+    namespace: App\Comments\Application\Controller
+  type: attribute
+  prefix: /api

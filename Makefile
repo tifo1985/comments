@@ -21,7 +21,14 @@ destroyCreateDB: ## create the asked database and user
 	$(DOCKER_SQL) "drop user if exists $(DB_USERNAME)"
 	$(DOCKER_SQL) "create database $(DB_NAME)"
 	$(DOCKER_SQL) "create user '$(DB_USERNAME)'@'%' identified by '$(DB_PASSWORD)';"
+	$(DOCKER_SQL) "GRANT ALL PRIVILEGES ON $(DB_NAME).* TO '$(DB_USERNAME)'@'%' WITH GRANT OPTION;"
+	$(DOCKER_EXEC_CMD) comments-api-php /bin/sh -c "php bin/console doctrine:migrations:migrate"
+
 
 vendorInstall: ## Install the vendors
 	$(DOCKER_EXEC_CMD) comments-api-php composer install
 	$(DOCKER_EXEC_CMD) comments-front-php composer install
+
+#- —— ✨ Code style / Tests services —————————————————————————————————————————————————————————
+php-cs-fixer: #- Check PHP Coding Standards Fixer.
+	$(DOCKER_EXEC_CMD) comments-front-php /bin/sh -c "vendor/bin/php-cs-fixer fix --using-cache=no --verbose --diff --dry-run"

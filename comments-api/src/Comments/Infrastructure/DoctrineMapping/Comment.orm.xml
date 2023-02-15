@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Comments\Domain\Entity\Comment" table="comment" repository-class="App\Comments\Infrastructure\Repository\CommentRepository">
+        <id name="id" type="guid" column="id" length="36" />
+        <field name="createdAt" type="datetime_immutable" column="created_at"  />
+        <field name="message" type="text" column="message" length="500" />
+        <field name="externalContentId" type="guid" column="external_content_id" length="36" />
+        <many-to-one field="parent" target-entity="Comment">
+            <join-column name="parent_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+
+</doctrine-mapping>
