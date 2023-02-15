@@ -1,0 +1,10 @@
+.idea
+###> symfony/framework-bundle ###
+/comments-api/.env.local
+/comments-api/var/
+/comments-api/vendor/
+
+/comments-front/.env.local
+/comments-front/var/
+/comments-front/vendor/
+###< symfony/framework-bundle ###
