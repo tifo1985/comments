@@ -1,0 +1,38 @@
+{% from "_macros.html.twig" import display, form %}
+
+<div class="card-body d-flex justify-content-between flex-column">
+    {% for comment in commentViewModel.comments %}
+        {{ display(comment) }}
+    {% endfor %}
+    {{ form(commentViewModel.article_id, null, 'block') }}
+</div>
+<script type="application/javascript">
+    function showForm(id) {
+        document.querySelector('#form_'+id).style.display = 'block';
+    }
+    function sendComment(id) {
+        const form = new FormData(document.querySelector('#form_'+id));
+
+        const XHR = new XMLHttpRequest();
+
+        // Define what happens on successful data submission
+        XHR.addEventListener('load', (event) => {
+            alert('Yeah! Data sent and response loaded.');
+        });
+
+        // Define what happens in case of an error
+        XHR.addEventListener('error', (event) => {
+            alert('Oops! Something went wrong.');
+        });
+
+        // Set up our request
+        XHR.open('POST', '{{ path('create_comment') }}');
+
+        // Finally, send our data.
+        XHR.send(JSON.stringify({
+            message: form.get('message'),
+            articleId: form.get('article_id'),
+            parentId: form.get('parent_id'),
+        }));
+    }
+</script>

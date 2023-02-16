@@ -1,5 +1,15 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+index:
+    path: /
+    controller: App\UserInterface\Controller\ListingArticleController
+
+article_details:
+    path: /{articleId}
+    controller: App\UserInterface\Controller\ArticleController
+
+comments:
+    path: /comments
+    controller: App\UserInterface\Controller\CommentController
+
+create_comment:
+    path: /comment/create
+    controller: App\UserInterface\Controller\SendCommentController
