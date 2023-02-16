@@ -8,10 +8,11 @@
         <id name="id" type="guid" column="id" length="36" />
         <field name="createdAt" type="datetime_immutable" column="created_at"  />
         <field name="message" type="text" column="message" length="500" />
-        <field name="externalContentId" type="guid" column="external_content_id" length="36" />
-        <many-to-one field="parent" target-entity="Comment">
-            <join-column name="parent_id" referenced-column-name="id" />
+        <field name="externalContentId" type="guid" column="external_content_id" length="36" nullable="true" />
+        <many-to-one field="parent" target-entity="Comment" inversed-by="children">
+            <join-column name="parent_id" />
         </many-to-one>
+        <one-to-many field="children" mapped-by="parent" target-entity="Comment" />
     </entity>
 
 </doctrine-mapping>

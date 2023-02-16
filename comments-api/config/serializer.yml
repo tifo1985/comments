@@ -1,0 +1,15 @@
+App\Comments\Domain\Entity\Comment:
+  attributes:
+    id:
+      groups: ['create', 'list']
+      serialized_path: '[profile][information][birthday]'
+    message:
+      groups: ['create', 'list']
+    parent:
+      groups: ['create']
+    children:
+      groups: ['list']
+    createdAt:
+      groups: ['create', 'list']
+      context:
+        datetime_format: 'Y-m-d'

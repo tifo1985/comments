@@ -15,7 +15,7 @@ final class CommentCreatedEvent extends Event implements DomainEventInterface
         string $id,
         private readonly string $message,
         private readonly null|string $parentId,
-        private readonly string $externalContentId
+        private readonly null|string $externalContentId
     ) {
         $this->occurredOn = new \DateTimeImmutable();
     }
@@ -35,7 +35,7 @@ final class CommentCreatedEvent extends Event implements DomainEventInterface
         return $this->parentId;
     }
 
-    public function externalContentId(): string
+    public function externalContentId(): null|string
     {
         return $this->externalContentId;
     }

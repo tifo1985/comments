@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/comments/', name: 'api_comment_post', methods: ['POST'])]
@@ -33,9 +34,8 @@ final class CreateCommentController extends AbstractController
                 $parameters['external_content_id'] ?? '',
                 $parameters['parent_id'] ?? null
             );
-            $comment = $this->handle($createCommentCommand);
 
-            return $this->json($comment, Response::HTTP_CREATED);
+            return $this->json($this->handle($createCommentCommand), Response::HTTP_CREATED, [], ['groups' => 'create']);
         } catch (\Throwable $exception) {
             dd($exception);
         }

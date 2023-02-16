@@ -37,12 +37,13 @@ final class CreateCommentHandler
                 throw new CommentNotFoundException('comment with id "'.$parentId.'" not found');
             }
         }
+        $externalContentId = $parent ? null : ($externalContentId ? new ValueObjectUuid($externalContentId): null);
 
         $comment = Comment::create(
             new ValueObjectUuid(Uuid::uuid4()->toString()),
             new Message($createCommentCommand->getMessage()),
             $parent,
-            $externalContentId ? new ValueObjectUuid($externalContentId) : null
+            $externalContentId
         );
 
         $this->commentRepository->save($comment);

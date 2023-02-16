@@ -7,14 +7,16 @@ namespace App\Comments\Domain\Entity;
 use App\Comments\Domain\Event\CommentCreatedEvent;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\ValueObject\Uuid;
+use Doctrine\Common\Collections\Collection;
 
-class Comment extends AggregateRoot
+class Comment extends AggregateRoot implements \JsonSerializable
 {
     private readonly string $id;
     private readonly string $message;
     private readonly null|Comment $parent;
+    private null|Collection $children = null;
     private readonly \DateTimeImmutable $createdAt;
-    private readonly string $externalContentId;
+    private readonly null|string $externalContentId;
 
     private function __construct(Uuid $id, Message $message, null|Comment $parent, null|Uuid $externalContentId)
     {
@@ -61,6 +63,41 @@ class Comment extends AggregateRoot
 
     public function getExternalContentId(): null|Uuid
     {
+        if (is_null($this->externalContentId)) {
+            return null;
+        }
         return new Uuid($this->externalContentId);
+    }
+
+    /** @return Comment[] */
+    public function getChildren(): array
+    {
+        return $this->children;
+    }
+
+    /** @var null|Comment[] $children */
+    public function setChildren(null|array $children): self
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    public function addChildren(null|Comment $child): self
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'created_at' => $this->createdAt->format(DATE_ATOM),
+            'message' => $this->message,
+            'children' => $this->children,
+            'external_content_id' => $this->externalContentId
+        ];
     }
 }
