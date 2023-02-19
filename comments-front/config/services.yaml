@@ -24,5 +24,10 @@ services:
         resource: "../src/UserInterface/Controller"
         tags: [ "controller.service_arguments" ]
 
+    League\OAuth2\Client\Provider\Facebook:
+        arguments:
+            - {clientId: '%env(FACEBOOK_ID)%', clientSecret: '%env(FACEBOOK_SECRET)%', redirectUri: '%env(FACEBOOK_CALLBACK)%', graphApiVersion: 'v2.10'}
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

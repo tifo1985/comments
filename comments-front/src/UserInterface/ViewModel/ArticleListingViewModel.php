@@ -4,10 +4,15 @@ namespace App\UserInterface\ViewModel;
 
 class ArticleListingViewModel
 {
-    public function __construct(private array $articles) {}
+    use HeaderViewModelTrait;
 
-    public function getArticles(): array
+    public function __construct(private readonly array $articles) {}
+
+    public function display(): array
     {
-        return $this->articles;
+        return [
+            'header' => $this->getHeaderInfo(),
+            'articles' => $this->articles,
+        ];
     }
 }

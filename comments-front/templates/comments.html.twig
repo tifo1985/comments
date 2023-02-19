@@ -2,9 +2,11 @@
 
 <div class="card-body d-flex justify-content-between flex-column">
     {% for comment in commentViewModel.comments %}
-        {{ display(comment) }}
+        {{ display(comment, commentViewModel.is_authenticated_user, commentViewModel.avatar) }}
     {% endfor %}
-    {{ form(commentViewModel.article_id, null, 'block') }}
+    {% if commentViewModel.is_authenticated_user %}
+        {{ form(commentViewModel.article_id, null, commentViewModel.avatar, 'block') }}
+    {% endif %}
 </div>
 <script type="application/javascript">
     function showForm(id) {

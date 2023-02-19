@@ -1,9 +1,10 @@
+
 index:
     path: /
     controller: App\UserInterface\Controller\ListingArticleController
 
 article_details:
-    path: /{articleId}
+    path: /article/{articleId}
     controller: App\UserInterface\Controller\ArticleController
 
 comments:
@@ -13,3 +14,11 @@ comments:
 create_comment:
     path: /comment/create
     controller: App\UserInterface\Controller\SendCommentController
+
+facebook_login:
+    path: /facebook_login
+    controller: App\UserInterface\Controller\LoginController::login
+
+facebook_callback:
+    path: /facebook_callback
+    controller: App\UserInterface\Controller\LoginController::callback

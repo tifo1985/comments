@@ -4,17 +4,17 @@ namespace App\UserInterface\Presenter;
 
 use App\Domain\Presenter\CommentPresenterInterface;
 use App\Domain\Response\CommentResponse;
+use App\UserInterface\Traits\TokenStorageTraits;
 use App\UserInterface\ViewModel\CommentViewModel;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
 
-class CommentPresenter implements CommentPresenterInterface
+class CommentPresenter extends PresenterAbstract implements CommentPresenterInterface
 {
-    public function __construct(private readonly Environment $twig) {}
+    use TokenStorageTraits;
 
     public function present(CommentResponse $commentResponse): Response
     {
-        $commentViewModel = new CommentViewModel($commentResponse);
+        $commentViewModel = new CommentViewModel($commentResponse, $this->getUser());
         $response = new Response();
 
         return $response->setContent($this->twig->render('comments.html.twig', [

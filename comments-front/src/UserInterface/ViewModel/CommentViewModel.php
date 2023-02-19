@@ -3,17 +3,24 @@
 namespace App\UserInterface\ViewModel;
 
 use App\Domain\Entity\Comment;
+use App\Domain\Entity\User;
 use App\Domain\Response\CommentResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CommentViewModel
 {
-    public function __construct(readonly private CommentResponse $commentResponse) {}
+    public function __construct(
+        readonly private CommentResponse $commentResponse,
+        readonly private null|User $user
+    ) {}
 
     public function display(): array
     {
         return [
             'comments' => array_map(fn(Comment $comment) => $this->displayComment($comment) , $this->commentResponse->getComments()),
             'article_id' => $this->commentResponse->getArticleId(),
+            'is_authenticated_user' => !is_null($this->user),
+            'avatar' => $this->user?->getAvatar(),
         ];
     }
 
