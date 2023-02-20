@@ -3,15 +3,10 @@
 namespace App\UserInterface\Presenter;
 
 use App\Domain\Presenter\ArticleListingPresenterInterface;
-use App\Domain\Presenter\ArticlePresenterInterface;
 use App\Domain\Response\ArticleListingResponse;
-use App\Domain\Response\ArticleResponse;
 use App\UserInterface\Traits\TokenStorageTraits;
 use App\UserInterface\ViewModel\ArticleListingViewModel;
-use App\UserInterface\ViewModel\ArticleViewModel;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Twig\Environment;
 
 class ArticleListingPresenter extends PresenterAbstract implements ArticleListingPresenterInterface
 {

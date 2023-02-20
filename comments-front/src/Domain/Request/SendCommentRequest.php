@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Request;
+
 use App\Domain\Entity\User;
 
 class SendCommentRequest
@@ -10,7 +13,8 @@ class SendCommentRequest
         readonly private string $parentId,
         readonly private string $articleId,
         readonly private User $user
-    ) {}
+    ) {
+    }
 
     public function getMessage(): string
     {

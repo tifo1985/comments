@@ -8,5 +8,6 @@ abstract class PresenterAbstract
 {
     public function __construct(
         readonly protected Environment $twig,
-    ) {}
+    ) {
+    }
 }

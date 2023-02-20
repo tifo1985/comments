@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\UseCase;
 
 use App\Domain\Gateway\ArticleGateway;
@@ -8,7 +10,9 @@ use App\Domain\Response\ArticleResponse;
 
 class Article
 {
-    public function __construct(readonly private ArticleGateway $articleGateway) {}
+    public function __construct(readonly private ArticleGateway $articleGateway)
+    {
+    }
 
     public function execute(ArticleRequest $articleRequest): ArticleResponse
     {

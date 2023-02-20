@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\ViewModel;
 
 use App\Domain\Entity\Comment;
 use App\Domain\Entity\User;
 use App\Domain\Response\CommentResponse;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-class CommentViewModel
+final class CommentViewModel
 {
     public function __construct(
         readonly private CommentResponse $commentResponse,
         readonly private null|User $user
-    ) {}
+    ) {
+    }
 
     public function display(): array
     {
         return [
-            'comments' => array_map(fn(Comment $comment) => $this->displayComment($comment) , $this->commentResponse->getComments()),
+            'comments' => array_map(fn (Comment $comment) => $this->displayComment($comment), $this->commentResponse->getComments()),
             'article_id' => $this->commentResponse->getArticleId(),
             'is_authenticated_user' => !is_null($this->user),
             'avatar' => $this->user?->getAvatar(),
@@ -32,7 +34,7 @@ class CommentViewModel
             'date' => $comment->getCreatedAt()->format('d/m/Y H:i'),
             'message' => $comment->getMessage(),
             'author' => $comment->getAuthor()->getName(),
-            'children' => array_map(fn($comment) => $this->displayComment($comment), $comment->getChildren())
+            'children' => array_map(fn ($comment) => $this->displayComment($comment), $comment->getChildren()),
         ];
     }
 }

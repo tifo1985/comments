@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\EventListener;
 
 use App\UserInterface\Traits\TokenStorageTraits;
@@ -9,7 +11,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class JWTCreatedListener
 {
     use TokenStorageTraits;
-    public function __construct(readonly private RequestStack $requestStack) {}
+
+    public function __construct(readonly private RequestStack $requestStack)
+    {
+    }
 
     public function onJWTCreated(JWTCreatedEvent $event)
     {

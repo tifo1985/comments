@@ -3,10 +3,8 @@
 namespace App\UserInterface\Presenter;
 
 use App\Domain\Presenter\SendCommentPresenterInterface;
-use App\Domain\Request\SendCommentRequest;
 use App\Domain\Response\SendCommentResponse;
 use App\UserInterface\Traits\TokenStorageTraits;
-use App\UserInterface\ViewModel\CommentViewModel;
 use App\UserInterface\ViewModel\SendCommentViewModel;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -14,7 +12,10 @@ use Twig\Environment;
 class SendCommentPresenter implements SendCommentPresenterInterface
 {
     use TokenStorageTraits;
-    public function __construct(private readonly Environment $twig) {}
+
+    public function __construct(private readonly Environment $twig)
+    {
+    }
 
     public function present(SendCommentResponse $sendCommentResponse): Response
     {

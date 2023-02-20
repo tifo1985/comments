@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Entity;
 
 class User
@@ -7,7 +9,6 @@ class User
     private string $id;
     private string $name;
     private string $email;
-
     private string $avatar;
 
     public function getEmail(): string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Controller;
 
 use App\Domain\Presenter\SendCommentPresenterInterface;
@@ -9,7 +11,7 @@ use App\UserInterface\Traits\TokenStorageTraits;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SendCommentController
+final class SendCommentController
 {
     use TokenStorageTraits;
 

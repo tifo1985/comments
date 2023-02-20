@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class UserProvider implements UserProviderInterface
+final class UserProvider implements UserProviderInterface
 {
-
     public function refreshUser(UserInterface $user)
     {
         return $user;

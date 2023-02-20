@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Security;
 
 use League\OAuth2\Client\Provider\Facebook;
@@ -14,9 +16,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class FacebookAuthenticator extends AbstractAuthenticator
+final class FacebookAuthenticator extends AbstractAuthenticator
 {
-    public function __construct(readonly private Facebook $facebook) {}
+    public function __construct(readonly private Facebook $facebook)
+    {
+    }
 
     public function supports(Request $request): ?bool
     {
@@ -33,7 +37,6 @@ class FacebookAuthenticator extends AbstractAuthenticator
 
             return new SelfValidatingPassport(new UserBadge(\json_encode($facebookUser->toArray())));
         } catch (\Throwable $exception) {
-
             throw new CustomUserMessageAuthenticationException('Authentication Failed');
         }
     }
@@ -48,8 +51,7 @@ class FacebookAuthenticator extends AbstractAuthenticator
     {
         $data = [
             // you may want to customize or obfuscate the message first
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
-
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData()),
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);

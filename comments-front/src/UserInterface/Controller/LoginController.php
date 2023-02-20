@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Controller;
 
 use App\UserInterface\Security\PreviousPageGenerator;
@@ -9,11 +11,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginController extends AbstractController
+final class LoginController extends AbstractController
 {
     public function login(Facebook $facebook, PreviousPageGenerator $previousPageGenerator, Request $request): Response
     {
         $previousPageGenerator->generateOnSession($request);
+
         return new RedirectResponse($facebook->getAuthorizationUrl());
     }
 

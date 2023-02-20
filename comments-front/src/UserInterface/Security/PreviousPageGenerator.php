@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Security;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +19,8 @@ final class PreviousPageGenerator
     public function __construct(
         readonly private UrlGeneratorInterface $urlGenerator,
         readonly private RouterInterface $router
-    ) {}
+    ) {
+    }
 
     public function generateOnSession(Request $request): void
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Ports;
 
 use App\Domain\Entity\Comment;
@@ -20,13 +22,14 @@ class CommentRepository implements CommentGateway
         readonly private HttpClientInterface $client,
         readonly private SerializerInterface $serializer,
         readonly private JWTTokenManagerInterface $JWTTokenManager
-    ) {}
+    ) {
+    }
 
     public function create(Comment $comment): Comment
     {
         $response = $this->client->request(
             Request::METHOD_POST,
-            self::BASE_URL . 'comments/',
+            self::BASE_URL.'comments/',
             [
                 'headers' => [
                     'Authorization' => 'Bearer '.$this->JWTTokenManager->create($this->tokenStorage->getToken()->getUser()),
@@ -35,7 +38,7 @@ class CommentRepository implements CommentGateway
                   'message' => $comment->getMessage(),
                   'external_content_id' => $comment->getArticleId(),
                   'parent_id' => $comment->getParent()?->getId(),
-                ])
+                ]),
             ]
         );
 
@@ -49,8 +52,8 @@ class CommentRepository implements CommentGateway
     public function findByArticle(string $articleId, int $maxResult): array
     {
         $response = $this->client->request(
-          Request::METHOD_GET,
-            self::BASE_URL . 'contents/'. $articleId .'/comments/'
+            Request::METHOD_GET,
+            self::BASE_URL.'contents/'.$articleId.'/comments/'
         );
 
         return $this->serializer->deserialize($response->getContent(), Comment::class.'[]', 'json');
@@ -58,7 +61,5 @@ class CommentRepository implements CommentGateway
 
     private function getJwtToken(User $user): string
     {
-
-
     }
 }

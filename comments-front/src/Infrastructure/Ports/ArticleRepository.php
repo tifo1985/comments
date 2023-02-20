@@ -1,13 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Ports;
 
-use App\Domain\Entity\Comment;
 use App\Domain\Gateway\ArticleGateway;
-use App\Domain\Gateway\CommentGateway;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ArticleRepository implements ArticleGateway
 {
@@ -34,7 +31,6 @@ class ArticleRepository implements ArticleGateway
         ],
     ];
 
-
     public function findAll(): array
     {
         return self::ARTICLES;
@@ -42,7 +38,7 @@ class ArticleRepository implements ArticleGateway
 
     public function find(string $articleId): null|array
     {
-        $articles =array_filter(self::ARTICLES, fn(array $article) => $article['uuid'] === $articleId);
+        $articles = array_filter(self::ARTICLES, fn (array $article) => $article['uuid'] === $articleId);
 
         return array_pop($articles);
     }

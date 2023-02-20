@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Entity;
 
 class Comment
@@ -67,7 +69,7 @@ class Comment
         return $this->children;
     }
 
-    /** @var Comment[] $children */
+    /** @var Comment[] */
     public function setChildren(array $children): self
     {
         $this->children = $children;

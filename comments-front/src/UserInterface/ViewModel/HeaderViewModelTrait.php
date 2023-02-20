@@ -12,10 +12,11 @@ trait HeaderViewModelTrait
     {
         $this->user = $user;
     }
+
     protected function getHeaderInfo(): array
     {
         return [
-            'is_authenticated_user' => !is_null($this->user)
+            'is_authenticated_user' => !is_null($this->user),
         ];
     }
 }

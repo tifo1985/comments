@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\ViewModel;
 
-class ArticleViewModel
+final class ArticleViewModel
 {
     use HeaderViewModelTrait;
-    public function __construct(private readonly array $article) {}
+
+    public function __construct(private readonly array $article)
+    {
+    }
 
     public function display(): array
     {

@@ -1,18 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\ViewModel;
 
 use App\Domain\Entity\Comment;
 use App\Domain\Entity\User;
-use App\Domain\Response\CommentResponse;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-class SendCommentViewModel
+final class SendCommentViewModel
 {
     public function __construct(
         readonly private Comment $comment,
         readonly private null|User $user
-    ) {}
+    ) {
+    }
 
     public function display(): array
     {
@@ -25,7 +26,7 @@ class SendCommentViewModel
             'message' => $this->comment->getMessage(),
             'author' => $this->comment->getAuthor()->getName(),
             'children' => [],
-            ]
+            ],
         ];
     }
 }

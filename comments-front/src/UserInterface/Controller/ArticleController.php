@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UserInterface\Controller;
 
 use App\Domain\Presenter\ArticlePresenterInterface;
@@ -8,7 +10,7 @@ use App\Domain\UseCase\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends AbstractController
+final class ArticleController extends AbstractController
 {
     public function __invoke(Article $article, ArticlePresenterInterface $articlePresenter, string $articleId): Response
     {

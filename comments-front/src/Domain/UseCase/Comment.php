@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\UseCase;
 
 use App\Domain\Gateway\CommentGateway;
@@ -8,7 +10,9 @@ use App\Domain\Response\CommentResponse;
 
 class Comment
 {
-    public function __construct(readonly private CommentGateway $commentGateway) {}
+    public function __construct(readonly private CommentGateway $commentGateway)
+    {
+    }
 
     public function execute(CommentRequest $commentRequest): CommentResponse
     {
