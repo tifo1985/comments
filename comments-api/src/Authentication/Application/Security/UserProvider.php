@@ -39,8 +39,9 @@ class UserProvider implements PayloadAwareUserProviderInterface
 
     public function loadUserByUsernameAndPayload(string $username, array $payload)
     {
-        $author = $this->loadUserByIdentifier($payload['id']);
-        if (!$author instanceof Author) {
+        try {
+            $author = $this->loadUserByIdentifier($payload['id']);
+        } catch (\Throwable $exception) {
             $author = $this->authorRepository->create(new Author(
                 new UserId($payload['id']),
                 new Email($payload['username']),
