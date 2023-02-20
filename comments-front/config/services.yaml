@@ -28,6 +28,11 @@ services:
         arguments:
             - {clientId: '%env(FACEBOOK_ID)%', clientSecret: '%env(FACEBOOK_SECRET)%', redirectUri: '%env(FACEBOOK_CALLBACK)%', graphApiVersion: 'v2.10'}
 
+    App\Infrastructure\EventListener\JWTCreatedListener:
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

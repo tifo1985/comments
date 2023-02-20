@@ -13,15 +13,16 @@ use App\Shared\Domain\ValueObject\Uuid as ValueObjectUuid;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[AsMessageHandler]
 final class CreateCommentHandler
 {
     public function __construct(
         readonly private CommentRepositoryInterface $commentRepository,
-        readonly private EventDispatcherInterface $eventDispatcher
-    ) {
-    }
+        readonly private EventDispatcherInterface $eventDispatcher,
+        readonly private TokenStorageInterface $tokenStorage
+    ) {}
 
     /**
      * @throws CommentNotFoundException
@@ -43,7 +44,8 @@ final class CreateCommentHandler
             new ValueObjectUuid(Uuid::uuid4()->toString()),
             new Message($createCommentCommand->getMessage()),
             $parent,
-            $externalContentId
+            $externalContentId,
+            $this->tokenStorage->getToken()->getUser()
         );
 
         $this->commentRepository->save($comment);

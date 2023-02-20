@@ -10,8 +10,7 @@ class CreateCommentCommand
         readonly string $message,
         readonly string $externalContentId,
         readonly null|string $parentId
-    ) {
-    }
+    ) {}
 
     public function getMessage(): string
     {

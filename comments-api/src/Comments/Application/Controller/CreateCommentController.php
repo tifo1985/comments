@@ -35,9 +35,10 @@ final class CreateCommentController extends AbstractController
                 $parameters['parent_id'] ?? null
             );
 
-            return $this->json($this->handle($createCommentCommand), Response::HTTP_CREATED, [], ['groups' => 'create']);
+            return $this->json($this->handle($createCommentCommand), Response::HTTP_CREATED);
         } catch (\Throwable $exception) {
-            dd($exception);
+            /** TODO monitoring */
+            throw $exception;
         }
     }
 }

@@ -10,6 +10,7 @@ class Comment
     private string $articleId;
     /** @var Comment[] */
     private array $children;
+    private null|User $author = null;
     private null|\DateTime $createdAt = null;
 
     public function getId(): string
@@ -82,6 +83,18 @@ class Comment
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

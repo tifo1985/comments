@@ -28,10 +28,10 @@ class CommentViewModel
     {
         return [
             'id' => $comment->getId(),
-            'image' => 'https://i.imgur.com/stD0Q19.jpg',
+            'image' => $comment->getAuthor()->getAvatar(),
             'date' => $comment->getCreatedAt()->format('d/m/Y H:i'),
             'message' => $comment->getMessage(),
-            'author' => 'Ellouze Abdellatif',
+            'author' => $comment->getAuthor()->getName(),
             'children' => array_map(fn($comment) => $this->displayComment($comment), $comment->getChildren())
         ];
     }

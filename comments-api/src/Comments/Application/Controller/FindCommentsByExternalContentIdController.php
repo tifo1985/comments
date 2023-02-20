@@ -24,6 +24,6 @@ final class FindCommentsByExternalContentIdController extends AbstractController
 
     public function __invoke(string $externalContentId): JsonResponse
     {
-        return $this->json($this->handle(new FindCommentsQuery($externalContentId)), Response::HTTP_OK, [], ['groups' => 'list']);
+        return $this->json($this->handle(new FindCommentsQuery($externalContentId)), Response::HTTP_OK);
     }
 }

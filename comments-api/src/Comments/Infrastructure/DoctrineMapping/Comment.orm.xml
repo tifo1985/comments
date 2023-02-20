@@ -13,6 +13,9 @@
             <join-column name="parent_id" />
         </many-to-one>
         <one-to-many field="children" mapped-by="parent" target-entity="Comment" />
+        <many-to-one field="author" target-entity="App\Authentication\Domain\Entity\Author">
+            <join-column name="author_id" />
+        </many-to-one>
     </entity>
 
 </doctrine-mapping>

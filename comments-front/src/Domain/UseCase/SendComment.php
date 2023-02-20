@@ -16,7 +16,8 @@ class SendComment
         $parentId = $request->getParentId();
         $comment = (new Comment())
             ->setMessage($request->getMessage())
-            ->setArticleId($request->getArticleId());
+            ->setArticleId($request->getArticleId())
+            ->setAuthor($request->getUser());
         if ($parentId) {
             $comment->setParent((new Comment())->setId($parentId));
         }

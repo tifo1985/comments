@@ -12,3 +12,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Comments/Infrastructure/DoctrineMapping'
                 prefix: 'App\Comments\Domain\Entity'
                 alias: Comment
+            User:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Authentication/Infrastructure/DoctrineMapping'
+                prefix: 'App\Authentication\Domain\Entity'
+                alias: User

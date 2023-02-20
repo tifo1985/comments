@@ -20,10 +20,10 @@ class SendCommentViewModel
             'avatar' => $this->user?->getAvatar(),
             'comment' => [
             'id' => $this->comment->getId(),
-            'image' => 'https://i.imgur.com/stD0Q19.jpg',
+            'image' => $this->comment->getAuthor()->getAvatar(),
             'date' => $this->comment->getCreatedAt()->format('d/m/Y H:i'),
             'message' => $this->comment->getMessage(),
-            'author' => 'Ellouze Abdellatif',
+            'author' => $this->comment->getAuthor()->getName(),
             'children' => [],
             ]
         ];
