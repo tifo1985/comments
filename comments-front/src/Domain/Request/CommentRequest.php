@@ -8,7 +8,7 @@ class CommentRequest
 {
     public function __construct(
         readonly private string $articleId,
-        readonly private string $maxResult
+        readonly private int $maxResult
     ) {
     }
 
@@ -17,7 +17,7 @@ class CommentRequest
         return $this->articleId;
     }
 
-    public function getMaxResult(): string
+    public function getMaxResult(): int
     {
         return $this->maxResult;
     }

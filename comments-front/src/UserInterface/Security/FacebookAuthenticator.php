@@ -18,13 +18,14 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 final class FacebookAuthenticator extends AbstractAuthenticator
 {
+    private const SUPPORT_ROUTE = 'facebook_callback';
     public function __construct(readonly private Facebook $facebook)
     {
     }
 
     public function supports(Request $request): ?bool
     {
-        return 'facebook_callback' === $request->get('_route');
+        return self::SUPPORT_ROUTE === $request->get('_route');
     }
 
     public function authenticate(Request $request): Passport

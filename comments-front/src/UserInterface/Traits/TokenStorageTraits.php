@@ -13,7 +13,7 @@ trait TokenStorageTraits
     protected TokenStorageInterface $tokenStorage;
 
     /** @required  */
-    public function setTokenStorage(TokenStorageInterface $tokenStorage)
+    public function setTokenStorage(TokenStorageInterface $tokenStorage): void
     {
         $this->tokenStorage = $tokenStorage;
     }

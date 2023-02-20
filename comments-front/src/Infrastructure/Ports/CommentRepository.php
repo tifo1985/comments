@@ -49,6 +49,7 @@ class CommentRepository implements CommentGateway
         return $comment;
     }
 
+    /** @return Comment[] */
     public function findByArticle(string $articleId, int $maxResult): array
     {
         $response = $this->client->request(
@@ -57,9 +58,5 @@ class CommentRepository implements CommentGateway
         );
 
         return $this->serializer->deserialize($response->getContent(), Comment::class.'[]', 'json');
-    }
-
-    private function getJwtToken(User $user): string
-    {
     }
 }

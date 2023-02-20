@@ -17,7 +17,8 @@ final class ArticleController extends AbstractController
         $request = new ArticleRequest($articleId);
         $response = $article->execute($request);
         if (is_null($response->getArticle())) {
-            return new Response('Not Found', 404);
+
+            return new Response('Not Found', Response::HTTP_NOT_FOUND);
         }
 
         return $articlePresenter->present($response);
