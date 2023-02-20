@@ -17,7 +17,7 @@ class CommentPresenter extends PresenterAbstract implements CommentPresenterInte
         $commentViewModel = new CommentViewModel($commentResponse, $this->getUser());
         $response = new Response();
 
-        return $response->setContent($this->twig->render('comments.html.twig', [
+        return $response->setContent($this->twig->render('comment.html.twig', [
             'commentViewModel' => $commentViewModel->display(),
         ]));
     }

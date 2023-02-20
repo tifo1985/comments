@@ -14,15 +14,12 @@ class SendComment
     public function execute(SendCommentRequest $request): SendCommentResponse
     {
         $parentId = $request->getParentId();
-        $articleId = $request->getParentId();
         $comment = (new Comment())
             ->setMessage($request->getMessage())
             ->setArticleId($request->getArticleId());
         if ($parentId) {
-            $comment->setParent(new Comment())->setId($parentId);
+            $comment->setParent((new Comment())->setId($parentId));
         }
-
-        $this->commentGateway->create($comment);
 
         return new SendCommentResponse($this->commentGateway->create($comment));
     }

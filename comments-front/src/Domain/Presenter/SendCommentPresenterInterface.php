@@ -2,9 +2,9 @@
 
 namespace App\Domain\Presenter;
 
-use App\Domain\Request\SendCommentRequest;
+use App\Domain\Response\SendCommentResponse;
 
 interface SendCommentPresenterInterface
 {
-    public function present(SendCommentRequest $sendCommentRequest);
+    public function present(SendCommentResponse $sendCommentResponse);
 }

@@ -28,7 +28,6 @@ class CommentViewModel
     {
         return [
             'id' => $comment->getId(),
-            'replay_display' => false,
             'image' => 'https://i.imgur.com/stD0Q19.jpg',
             'date' => $comment->getCreatedAt()->format('d/m/Y H:i'),
             'message' => $comment->getMessage(),

@@ -21,12 +21,20 @@ class CommentRepository implements CommentGateway
     {
         $response = $this->client->request(
             Request::METHOD_POST,
-            self::BASE_URL . '/comments/',
+            self::BASE_URL . 'comments/',
             [
-                'json' =>
+                'json' => array_filter([
+                  'message' => $comment->getMessage(),
+                  'external_content_id' => $comment->getArticleId(),
+                  'parent_id' => $comment->getParent()?->getId(),
+                ])
             ]
         );
-        dd($comment);
+
+        $commentData = \json_decode($response->getContent(), true);
+        $comment->setId($commentData['id'])
+            ->setCreatedAt(new \DateTime($commentData['created_at']));
+
         return $comment;
     }
 

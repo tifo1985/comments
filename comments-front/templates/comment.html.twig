@@ -1,9 +1,11 @@
 {% from "_macros.html.twig" import display, form %}
 
 <div class="card-body d-flex justify-content-between flex-column">
+    <div id="children_{{ commentViewModel.article_id }}">
     {% for comment in commentViewModel.comments %}
         {{ display(comment, commentViewModel.is_authenticated_user, commentViewModel.avatar) }}
     {% endfor %}
+    </div>
     {% if commentViewModel.is_authenticated_user %}
         {{ form(commentViewModel.article_id, null, commentViewModel.avatar, 'block') }}
     {% endif %}
@@ -13,13 +15,19 @@
         document.querySelector('#form_'+id).style.display = 'block';
     }
     function sendComment(id) {
-        const form = new FormData(document.querySelector('#form_'+id));
+        const form = document.querySelector('#form_'+id);
+        const formData = new FormData(document.querySelector('#form_'+id));
 
         const XHR = new XMLHttpRequest();
 
         // Define what happens on successful data submission
         XHR.addEventListener('load', (event) => {
-            alert('Yeah! Data sent and response loaded.');
+            const children = document.querySelector('#children_'+id);
+            const div = document.createElement('div');
+            div.innerHTML = event.currentTarget.response.trim();
+            children.append(div.firstChild);
+            form.style.display = 'none';
+            form.querySelector('textarea').textContent='';
         });
 
         // Define what happens in case of an error
@@ -32,9 +40,9 @@
 
         // Finally, send our data.
         XHR.send(JSON.stringify({
-            message: form.get('message'),
-            articleId: form.get('article_id'),
-            parentId: form.get('parent_id'),
+            message: formData.get('message'),
+            articleId: formData.get('article_id'),
+            parentId: formData.get('parent_id'),
         }));
     }
 </script>

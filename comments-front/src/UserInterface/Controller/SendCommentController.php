@@ -18,7 +18,6 @@ class SendCommentController
             $parameters['parentId'],
             $parameters['articleId']
         );
-
         $response = $sendComment->execute($request);
 
         return $sendCommentPresenter->present($response);

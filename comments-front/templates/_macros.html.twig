@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% macro display(comment, is_authenticated_user, avatar) %}
-    <div class="media  mt-4">
+    <div class="media mt-4" >
         <img style="width: 60px;height: 60px;" class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{ comment.image }}" />
         <div class="media-body">
             <div class="row">
@@ -28,14 +28,16 @@
                 </div>
             </div>
             {{ comment.message }}
+            <div id="children_{{ comment.id }}">
+            {% for comment in comment.children %}
+                {{ _self.display(comment) }}
+            {% endfor %}
+            </div>
             {% if is_authenticated_user %}
                 <div>
                     {{ _self.form(null, comment.id, avatar) }}
                 </div>
             {% endif %}
-            {% for comment in comment.children %}
-                {{ _self.display(comment) }}
-            {% endfor %}
 
         </div>
 
