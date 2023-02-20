@@ -69,6 +69,7 @@ class Comment extends AggregateRoot implements \JsonSerializable
         if (is_null($this->externalContentId)) {
             return null;
         }
+
         return new Uuid($this->externalContentId);
     }
 
@@ -78,7 +79,7 @@ class Comment extends AggregateRoot implements \JsonSerializable
         return $this->children;
     }
 
-    /** @var null|Comment[] $children */
+    /** @var Comment[]|null */
     public function setChildren(null|array $children): self
     {
         $this->children = $children;
@@ -105,7 +106,7 @@ class Comment extends AggregateRoot implements \JsonSerializable
                 'name' => $this->author->name()->getValue(),
                 'avatar' => $this->author->avatar()->getValue(),
                 'email' => $this->author->email()->getValue(),
-            ]
+            ],
         ];
     }
 }

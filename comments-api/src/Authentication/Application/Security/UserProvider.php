@@ -18,7 +18,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserProvider implements PayloadAwareUserProviderInterface
 {
-    public function __construct(private readonly AuthorRepositoryInterface $authorRepository){}
+    public function __construct(private readonly AuthorRepositoryInterface $authorRepository)
+    {
+    }
 
     public function refreshUser(UserInterface $user)
     {
