@@ -22,7 +22,7 @@ destroyCreateDB: ## create the asked database and user
 	$(DOCKER_SQL) "create database $(DB_NAME)"
 	$(DOCKER_SQL) "create user '$(DB_USERNAME)'@'%' identified by '$(DB_PASSWORD)';"
 	$(DOCKER_SQL) "GRANT ALL PRIVILEGES ON $(DB_NAME).* TO '$(DB_USERNAME)'@'%' WITH GRANT OPTION;"
-	$(DOCKER_EXEC_CMD) comments-api-php /bin/sh -c "php bin/console doctrine:migrations:migrate"
+	$(DOCKER_EXEC_CMD) comments-api-php /bin/sh -c "php bin/console --no-interaction doctrine:migrations:migrate"
 
 
 vendorInstall: ## Install the vendors
